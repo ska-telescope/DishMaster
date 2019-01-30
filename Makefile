@@ -8,9 +8,9 @@
 # the Docker tag for this project. The definition below inherits the standard
 # value for DOCKER_REGISTRY_HOST (=rska-registry.av.it.pt) and overwrites
 # DOCKER_REGISTRY_USER and PROJECT to give a final Docker tag of
-# ska-registry.av.it.pt/DishMaster/DishMaster
+# ska-registry.av.it.pt/dishmaster/dishmaster
 #
-DOCKER_REGISTRY_USER:=dishmaster
+DOCKER_REGISTRY_USER:=tango-example
 PROJECT = dishmaster
 
 #
