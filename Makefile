@@ -10,8 +10,8 @@
 # DOCKER_REGISTRY_USER and PROJECT to give a final Docker tag of
 # ska-registry.av.it.pt/DishMaster/DishMaster
 #
-DOCKER_REGISTRY_USER:=tango-example
-PROJECT = DishMaster
+DOCKER_REGISTRY_USER:=dishmaster
+PROJECT = dishmaster
 
 #
 # include makefile to pick up the standard Make targets, e.g., 'make build'
