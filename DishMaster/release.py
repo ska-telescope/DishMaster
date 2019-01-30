@@ -18,3 +18,6 @@ author_email = "apurva.ska at gmail.com"
 license = """BSD-3-Clause"""
 url = """www.tango-controls.org"""
 copyright = """"""
+
+release=1.0.0
+tag=dishmaster-1.0.0
