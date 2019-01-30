@@ -10,7 +10,7 @@
 # DOCKER_REGISTRY_USER and PROJECT to give a final Docker tag of
 # ska-registry.av.it.pt/dishmaster/dishmaster
 #
-DOCKER_REGISTRY_USER:=tango-example
+DOCKER_REGISTRY_USER:=dishmaster
 PROJECT = dishmaster
 
 #
