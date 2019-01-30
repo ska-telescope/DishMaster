@@ -12,7 +12,7 @@ cache:
 # This can be an array or a multi-line string.
 before_script:
   - pip3 install pipenv
-  - pipenv install
+  #- pipenv install
 
 stages:
   - test
