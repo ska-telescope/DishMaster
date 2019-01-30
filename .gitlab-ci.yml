@@ -27,7 +27,7 @@ test:
   tags:
    - docker-executor
   script:
-   - pipenv run python setup.py test
+   - pipenv run python3 setup.py test
   # - cp coverage.xml htmlcov/
   artifacts:
     paths:
