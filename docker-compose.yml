@@ -45,7 +45,7 @@ services:
       - giop:tcp::10000
 
   DishMaster:
-    image: ${DOCKER_REGISTRY_HOST}/${DOCKER_REGISTRY_USER}/DishMaster:latest
+    image: ${DOCKER_REGISTRY_HOST}/${DOCKER_REGISTRY_USER}/dishmaster:latest
     depends_on:
       - databaseds
     environment:
