@@ -26,7 +26,7 @@ ifeq ($(strip $(DOCKER_REGISTRY_HOST)),)
 endif
 
 ifeq ($(strip $(DOCKER_REGISTRY_USER)),)
-  DOCKER_REGISTRY_USER = dishmaster
+  DOCKER_REGISTRY_USER = tango-example
 endif
 
 IMAGE=$(DOCKER_REGISTRY_HOST)/$(DOCKER_REGISTRY_USER)/$(NAME)
