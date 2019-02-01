@@ -53,7 +53,7 @@ DOCKER_RUN_ARGS =
 #      to the host
 #
 make = tar -c test-harness/ | \
-	   docker run -i --rm --network=$(notdir $(CURDIR))_default \
+	   docker run -i --rm --network=$(call lc, $(notdir $(CURDIR))_default) \
 	   -e TANGO_HOST=databaseds:10000 \
 	   -v $(CACHE_VOLUME):/home/tango/.cache \
 	   -v /build -w /build -u tango $(DOCKER_RUN_ARGS) $(IMAGE_TO_TEST) \
@@ -84,7 +84,7 @@ piplock: build  ## overwrite Pipfile.lock with the image version
 
 interactive: up
 interactive:  ## start an interactive session using the project image (caution: R/W mounts source directory to /app)
-	docker run --rm -it --name=$(PROJECT)-dev -e TANGO_HOST=databaseds:10000 --network=$(notdir $(CURDIR))_default \
+	docker run --rm -it --name=$(PROJECT)-dev -e TANGO_HOST=databaseds:10000 --network=$(call lc, $(notdir $(CURDIR))_default) \
 	  -v $(CURDIR):/app $(IMAGE_TO_TEST) /bin/bash
 
 down:  ## stop develop/test environment and any interactive session
