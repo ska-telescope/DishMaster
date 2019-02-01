@@ -39,9 +39,9 @@ setup(
       license='BSD-3-Clause',
       long_description=long_description,
       url='www.tango-controls.org',
-      platforms="All Platforms", install_requires=['CONST'],
-      test_suite='tests',
-      install_requires=['pytango'],  # FIXME: add your package's dependencies to this list
+      platforms="All Platforms", install_requires=['CONST','pytango'],
+      #test_suite='test',
+      #install_requires=['pytango'],  # FIXME: add your package's dependencies to this list
       setup_requires=[
           # dependency for `python setup.py test`
           'pytest-runner',
