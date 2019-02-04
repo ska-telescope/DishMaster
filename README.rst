@@ -1,5 +1,7 @@
 ## DishMaster Simulator
 
+[![Documentation Status](https://readthedocs.org/projects/dishmaster/badge/?version=latest)](https://developerskatelescopeorg.readthedocs.io/projects/dishmaster/en/latest/?badge=latest)
+
 SKA Dish Master TANGO device server
 
 ## Requirement
