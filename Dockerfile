@@ -28,4 +28,4 @@ RUN buildDeps="ca-certificates git" \
 
 USER tango
 
-CMD ["/venv/bin/python", "/app/DishMaster/DishMaster.py"]
+CMD ["service rsyslog start", ""/venv/bin/python", "/app/DishMaster/DishMaster.py"]
