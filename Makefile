@@ -61,8 +61,7 @@ make = tar -c test-harness/ | \
 	   tar x --strip-components 1 --warning=all && \
 	   make TANGO_HOST=databaseds:10000 $1"
 
-test: &1; \
-	  DOCKER_REGISTRY_HOST=$(DOCKER_REGISTRY_HOST) DOCKER_REGISTRY_DOCKER_RUN_ARGS = --volumes-from=$(BUILD)
+test: DOCKER_RUN_ARGS = --volumes-from=$(BUILD)
 test: build  ## test the application
 	$(INIT_CACHE)
 	DOCKER_REGISTRY_HOST=$(DOCKER_REGISTRY_HOST) DOCKER_REGISTRY_USER=$(DOCKER_REGISTRY_USER) docker-compose up -d
@@ -72,7 +71,8 @@ test: build  ## test the application
 	  docker cp $(BUILD):/build .; \
 	  docker rm -f -v $(BUILD); \
 	  docker logs dishmaster_DishMaster_1; \
-      docker logs dishmaster_DishMaster_1 > build/container.log 2>USER=$(DOCKER_REGISTRY_USER) docker-compose down; \
+      docker logs dishmaster_DishMaster_1 > build/container.log 2>&1; \
+	  DOCKER_REGISTRY_HOST=$(DOCKER_REGISTRY_HOST) DOCKER_REGISTRY_USER=$(DOCKER_REGISTRY_USER) docker-compose down; \
 	  exit $$status
 
 pull:  ## download the application image
