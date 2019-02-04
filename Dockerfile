@@ -27,5 +27,5 @@ RUN buildDeps="ca-certificates git" \
 
 USER tango
 
-CMD ["service mysql start"]
+CMD ["service rysyslog start"]
 CMD ["/venv/bin/python", "/app/DishMaster/DishMaster.py"]
