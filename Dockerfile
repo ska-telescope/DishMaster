@@ -22,10 +22,12 @@ RUN buildDeps="ca-certificates git" \
    && su tango -c "/venv/bin/pip install git+https://github.com/ska-telescope/lmc-base-classes.git@story_AT1-163" \
    && apt-get purge -y --auto-remove $buildDeps \
    && rm -rf /var/lib/apt/lists/* /home/tango/.cache \
-   && DEBIAN_FRONTEND=noninteractive apt-get install rsyslog \
+   && DEBIAN_FRONTEND=noninteractive apt-get update \
+   && DEBIAN_FRONTEND=noninteractive apt-get -y install rsyslog \
+   && service rsyslog start
    && mkdir /dev/log \
    && chmod 777 /dev/log \
-   && service rsyslog start
+
 USER tango
 
 CMD ["/venv/bin/python", "/app/DishMaster/DishMaster.py"]
