@@ -24,9 +24,9 @@ RUN buildDeps="ca-certificates git" \
    && rm -rf /var/lib/apt/lists/* /home/tango/.cache \
    && DEBIAN_FRONTEND=noninteractive apt-get update \
    && DEBIAN_FRONTEND=noninteractive apt-get -y install rsyslog \
-   && service rsyslog start
+   && service rsyslog start \
    && mkdir /dev/log \
-   && chmod 777 /dev/log \
+   && chmod 777 /dev/log
 
 USER tango
 
