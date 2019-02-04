@@ -23,9 +23,9 @@ RUN buildDeps="ca-certificates git" \
    && apt-get purge -y --auto-remove $buildDeps \
    && rm -rf /var/lib/apt/lists/* /home/tango/.cache \
    && DEBIAN_FRONTEND=noninteractive apt-get update \
-   && DEBIAN_FRONTEND=noninteractive apt-get -y install rsyslog \
-   && service rsyslog start
+   && DEBIAN_FRONTEND=noninteractive apt-get -y install rsyslog
 
 USER tango
 
-CMD ["service rsyslog start", ""/venv/bin/python", "/app/DishMaster/DishMaster.py"]
+CMD ["service mysql start"]
+CMD ["/venv/bin/python", "/app/DishMaster/DishMaster.py"]
