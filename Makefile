@@ -74,8 +74,8 @@ test: build  ## test the application
 	  rm -fr build; \
 	  docker cp $(BUILD):/build .; \
 	  docker rm -f -v $(BUILD); \
-	  docker logs dishmaster_dishmaster_1; \
-	  docker logs dishmaster_dishmaster_1 > build/container.log 2>&1; \
+	  docker logs dish-master_dishmaster_1; \
+	  docker logs dish-master_dishmaster_1 > build/container.log 2>&1; \
 	  DOCKER_REGISTRY_HOST=$(DOCKER_REGISTRY_HOST) DOCKER_REGISTRY_USER=$(DOCKER_REGISTRY_USER) docker-compose down; \
 	  exit $$status
 
