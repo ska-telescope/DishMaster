@@ -41,6 +41,8 @@ DOCKER_RUN_ARGS =
 #
 .DEFAULT_GOAL := help
 
+DOCKER_NETWORK := $(shell echo "$(notdir $(CURDIR))"_default | tr A-Z a-z)
+
 #
 # defines a function to copy the ./test-harness directory into the container
 # and then runs the requested make target in the container. The container is:
@@ -53,10 +55,10 @@ DOCKER_RUN_ARGS =
 #      to the host
 #
 make = tar -c test-harness/ | \
-	   docker run -i --rm --network=$(call lc, $(notdir $(CURDIR))_default) \
+	   docker run -i --rm --network=$(DOCKER_NETWORK) \
 	   -e TANGO_HOST=databaseds:10000 \
 	   -v $(CACHE_VOLUME):/home/tango/.cache \
-	   --volumes-from rsyslog-dishmaster:rw \
+	   --volumes-from=rsyslog-dishmaster:rw \
 	   -v /build -w /build -u tango $(DOCKER_RUN_ARGS) $(IMAGE_TO_TEST) \
 	   bash -c "sudo chown -R tango:tango /build && \
 	   tar x --strip-components 1 --warning=all && \
@@ -72,7 +74,7 @@ test: build  ## test the application
 	  rm -fr build; \
 	  docker cp $(BUILD):/build .; \
 	  docker rm -f -v $(BUILD); \
-          docker logs dishmaster_dishmaster_1; \
+	  docker logs dishmaster_dishmaster_1; \
 	  docker logs dishmaster_dishmaster_1 > build/container.log 2>&1; \
 	  DOCKER_REGISTRY_HOST=$(DOCKER_REGISTRY_HOST) DOCKER_REGISTRY_USER=$(DOCKER_REGISTRY_USER) docker-compose down; \
 	  exit $$status
@@ -88,8 +90,8 @@ piplock: build  ## overwrite Pipfile.lock with the image version
 
 interactive: up
 interactive:  ## start an interactive session using the project image (caution: R/W mounts source directory to /app)
-	docker run --rm -it --name=$(PROJECT)-dev -e TANGO_HOST=databaseds:10000 --network=$(call lc, $(notdir $(CURDIR))_default) \
-          -v $(CURDIR):/app --volumes-from rsyslog-dishmaster:rw $(IMAGE_TO_TEST) /bin/bash
+	docker run --rm -it --name=$(PROJECT)-dev -e TANGO_HOST=databaseds:10000 --network=$(DOCKER_NETWORK) \
+          -v $(CURDIR):/app --volumes-from=rsyslog-dishmaster:rw $(IMAGE_TO_TEST) /bin/bash
 
 down:  ## stop develop/test environment and any interactive session
 	docker ps | grep $(PROJECT)-dev && docker stop $(PROJECT)-dev || true

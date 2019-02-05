@@ -13,10 +13,16 @@ SKA Dish Master TANGO device server
 from __future__ import print_function
 from __future__ import absolute_import
 
+# import sys
+# import os
+# path = os.path.join(os.path.dirname(__file__), os.pardir)
+# sys.path.insert(0, os.path.abspath(path))
+# print("sys.path: ", sys.path)
 import sys
 import os
-path = os.path.join(os.path.dirname(__file__), os.pardir)
-sys.path.insert(0, os.path.abspath(path))
+file_path = os.path.dirname(os.path.abspath(__file__))
+module_path = os.path.abspath(os.path.join(file_path, os.pardir)) + "/DishMaster"
+sys.path.insert(0, module_path)
 print("sys.path: ", sys.path)
 
 # PyTango imports
@@ -164,6 +170,7 @@ class DishMaster(with_metaclass(DeviceMeta, SKAMaster)):
     # -----------------
     ReceptorNumber = device_property(
         dtype='uint',
+        doc="Number of Receptor ",
     )
 
     # ----------
@@ -173,67 +180,82 @@ class DishMaster(with_metaclass(DeviceMeta, SKAMaster)):
         dtype='DevEnum',
         enum_labels=["OFF", "STARTUP", "SHUTDOWN", "STANDBY-LP",
                      "STANDBY-FP", "MAINTENANCE", "STOW", "CONFIG", "OPERATE", ],
+        doc="Mode of the dish",
     )
 
     pointingState = attribute(
         dtype='DevEnum',
         enum_labels=["READY", "SLEW", "TRACK", "SCAN", ],
+        doc="Pointing state of the dish",
+
     )
 
     band1SamplerFrequency = attribute(
         dtype='double',
         access=AttrWriteType.WRITE,
+        doc="Band1 Sampler Frequency of the dish",
     )
 
     band2SamplerFrequency = attribute(
         dtype='double',
         access=AttrWriteType.WRITE,
+        doc="Band2 Sampler Frequency of the dish",
     )
 
     band3SamplerFrequency = attribute(
         dtype='double',
         access=AttrWriteType.WRITE,
+        doc="Band3 Sampler Frequency of the dish",
     )
 
     band4SamplerFrequency = attribute(
         dtype='double',
         access=AttrWriteType.WRITE,
+        doc="Band4 Sampler Frequency of the dish",
     )
 
     band5aSamplerFrequency = attribute(
         dtype='double',
         access=AttrWriteType.WRITE,
+        doc="Band5a Sampler Frequency of the dish",
     )
 
     band5bSamplerFrequency = attribute(
         dtype='double',
         access=AttrWriteType.WRITE,
+        doc="Band5b Sampler Frequency of the dish",
     )
 
     capturing = attribute(
         dtype='bool',
+        doc="Data Capturing of the dish",
     )
 
     ConfiguredBand = attribute(
         dtype='DevEnum',
         enum_labels=["BAND1", "BAND2", "BAND3", "BAND4", "BAND5a", "BAND5b", "NONE", ],
+        doc="Configured band of the dish",
     )
 
     WindSpeed = attribute(
         dtype='double',
         access=AttrWriteType.READ_WRITE,
         unit="km/h",
+        doc="Wind speed of the dish",
+
     )
 
     desiredPointing = attribute(
         dtype=('double',),
         access=AttrWriteType.READ_WRITE,
         max_dim_x=7,
+        doc="Desired pointing coordinates of the dish",
     )
 
     achievedPointing = attribute(
         dtype=('double',),
         max_dim_x=7,
+        doc="Achieved pointing coordinates of the dish",
     )
 
     # ---------------
@@ -248,9 +270,6 @@ class DishMaster(with_metaclass(DeviceMeta, SKAMaster)):
         # PROTECTED REGION ID(DishMaster.init_device) ENABLED START #
         try:
             # Initialise Properties
-            print("GroupDefinitions: ", self.GroupDefinitions)
-            if self.GroupDefinitions:
-                print ("GroupDefinitions Not empty")
             self.SkaLevel = 1                           # Set SkaLevel to 1
             # Initialise Attributes
             self._health_state = 0                      # Set healthState to OK
