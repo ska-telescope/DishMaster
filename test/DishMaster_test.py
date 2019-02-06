@@ -254,7 +254,7 @@ class TestDishMaster(object):
         """Test for buildState"""
         # PROTECTED REGION ID(DishMaster.test_buildState) ENABLED START #
         assert tango_context.device.buildState == (
-            "tangods-skabasedevice, 1.0.0, A generic base device for SKA.")
+            "lmcbaseclasses, 1.0.0, A set of generic base devices for SKA Telescope.")
         # PROTECTED REGION END #    //  DishMaster.test_buildState
 
     def test_versionId(self, tango_context):
