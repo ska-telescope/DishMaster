@@ -27,6 +27,7 @@ before_script:
 
 stages:
   - test
+  - pages
 
 
 test:
@@ -45,7 +46,7 @@ test:
 pages:
   tags:
     - docker-executor
-  stage: test
+  stage: pages
 
   script:
    - make build
