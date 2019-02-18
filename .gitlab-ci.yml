@@ -37,8 +37,8 @@ test:
   script:
     - make test
     - ls -la
-    - cp -r build/htmlcov/* public
     - mv build public
+    - mv public/htmlcov/* public
     - make push
   artifacts:
     paths:
