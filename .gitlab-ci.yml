@@ -35,9 +35,7 @@ test:
     - docker-executor
   stage: test
   script:
-    - make build
     - make test
-    - mv build public
     - make push
   artifacts:
     paths:
@@ -49,8 +47,6 @@ pages:
   stage: pages
 
   script:
-   - make build
-   - make test
    - ls -la
    - mkdir .public
    - cp build/coverage.xml .public
