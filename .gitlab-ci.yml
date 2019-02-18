@@ -27,7 +27,7 @@ before_script:
 
 stages:
   - test
-  - pages
+#  - pages
 
 
 test:
@@ -36,23 +36,25 @@ test:
   stage: test
   script:
     - make test
+    - ls -la
+    - mv build public
     - make push
   artifacts:
     paths:
       - public
 
-pages:
-  tags:
-    - docker-executor
-  stage: pages
-
-  script:
-   - ls -la
-   - mkdir .public
-   - cp build/coverage.xml .public
-   - cp -r build/htmlcov/* .public
-   - mv .public public
-  artifacts:
-    paths:
-      - public
-    expire_in: 30 days
+#pages:
+#  tags:
+#    - docker-executor
+#  stage: pages
+#
+#  script:
+#   - ls -la
+#   - mkdir .public
+#   - cp build/coverage.xml .public
+#   - cp -r build/htmlcov/* .public
+#   - mv .public public
+#  artifacts:
+#    paths:
+#      - public
+#    expire_in: 30 days
